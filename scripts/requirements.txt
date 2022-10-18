@@ -1,0 +1,3 @@
+azure-mgmt-storage==20.1.0
+azure-identity>=1.5.0
+python-dotenv==0.21.0

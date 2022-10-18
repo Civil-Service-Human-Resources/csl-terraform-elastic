@@ -2,20 +2,25 @@
 module "es_course_db" {
   source = "../../modules/es_deployment"
   env = "integration"
-  monitoring_deployment_id = ec_deployment.csl_test_monitoring.id
+  monitoring_deployment_id = ec_deployment.csl_prod_monitoring.id
   es_topologies = [
     {
       type = "hot_content"
-      size_in_gb = "2g"
+      size_in_gb = "8g"
+      zones = 1
+    },
+    {
+      type = "coordinating"
+      size_in_gb = "8g"
       zones = 1
     }
   ]
 }
 
-# Logging and monitoring - this instance covers all 3 test regions
-resource "ec_deployment" "csl_test_monitoring" {
+# Logging and monitoring - this instance covers production
+resource "ec_deployment" "csl_prod_monitoring" {
   # Optional name.
-  name = "elastic-test-monitoring"
+  name = "elastic-prod-monitoring"
 
   # Mandatory fields
   region                 = "azure-uksouth"
