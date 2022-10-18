@@ -18,10 +18,15 @@ The script `scripts/create_tf_backend.py` must first be used to set up the Azure
 This script will create a `backend.conf` file within the various environment sub-directories. The backend configuration file contains the properties required to store/access the state file securely within Azure Blob storage. This should **NOT** be committed as it contains sensitive information.
 
 ### Terraform commands
+#### Import
+Importing into the Terraform infrastructure should only be done via the `import.sh` script. It only needs to be performed once - when a new Elasticsearch environment is created.
+
+#### Init
 Once the backend is created, `terraform init -backend-config=backend.conf` can be run against the desired environment (`cd environments/<environment name>`).
 
 This will initialise Terraform using the newly created backend configuration file, which will use the remote state file in Azure blob storage.
 
+#### Plan/Apply
 `terraform plan` and `terraform apply` can then be used in the normal way to plan/apply changes to the infrastructure.
 
 ## Python scripts
@@ -59,3 +64,5 @@ Requires the following environment variables:
 - ELASTIC_ENDPOINT: The Elasticsearch endpoint
 
 Running the script will create any users (along with their roles) that have been specified in the file. Right now only the `learning_catalogue` user is required.
+
+**NOTE**: A random password will be generated for each user. The password will be printed in the shell that is used to run the Python script. The password **cannot** be viewed after it has been created, only changed, so make sure to write it down.
