@@ -1,6 +1,11 @@
 terraform {
   required_version = "~> 0.13.0"
-  backend "azurerm" {}
+  backend "azurerm" {
+    resource_group_name = "lpgterraform"
+    storage_account_name = "lpgterraformsecure"
+    container_name = "tfstatesecure"
+    key = "integration.elastic"
+  }
 
   required_providers {
     ec = {

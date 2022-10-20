@@ -1,5 +1,4 @@
 import sys
-import create_tf_backend
 import create_elastic_users
 
 
@@ -12,9 +11,6 @@ class Job:
 
 
 JOBS = [
-    Job("tf_backend",
-        "Initialise the Terraform backend for all environments.",
-        create_tf_backend.run),
     Job("elastic_users",
         "Create the required Elastic users for CSL applictions",
         create_elastic_users.run)

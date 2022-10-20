@@ -6,4 +6,3 @@ venv
 # Terraform
 terraform.*
 .terraform
-backend.conf
