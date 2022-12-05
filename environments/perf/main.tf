@@ -7,8 +7,8 @@ data "ec_deployments" "monitoring_deploy" {
 ### Course DB
 module "es_course_db" {
   source = "../../modules/es_deployment"
-  env = "staging"
-  monitoring_deployment_id = data.ec_deployments.monitoring_deploy.deployments[0].id
+  env = "performance"
+  monitoring_deployment_id = data.ec_deployments.monitoring_deploy.deployments[0].deployment_id
   es_topologies = [
     {
       type = "hot_content"

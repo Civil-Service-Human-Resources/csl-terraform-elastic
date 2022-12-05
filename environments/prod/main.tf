@@ -1,8 +1,13 @@
+data "ec_deployments" "monitoring_deploy" {
+  name_prefix = "elastic-test-monitoring"
+  size = 1
+}
+
 ### Course DB
 module "es_course_db" {
   source = "../../modules/es_deployment"
-  env = "integration"
-  monitoring_deployment_id = ec_deployment.csl_prod_monitoring.id
+  env = "production"
+  monitoring_deployment_id = data.ec_deployments.monitoring_deploy.deployments[0].deployment_id
   es_topologies = [
     {
       type = "hot_content"
